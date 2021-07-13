@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'Antro';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/antro/Antro-Medium.otf") format("truetype"); }
+
+@font-face {
+  font-family: 'Neue';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/neue/Neue-Medium.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/neue/Neue-Regular-2.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/neue/Neue-Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Neue';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/neue/Neue-Thin.ttf") format("truetype"); }
