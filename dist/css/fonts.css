@@ -6,6 +6,20 @@
   src: url("../fonts/antro/Antro-Medium.otf") format("truetype"); }
 
 @font-face {
+  font-family: 'NeuePro-Regular';
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/neue/Neue-Regular.woff") format("truetype");
+  src: url("../fonts/neue/Neue-Regular.woff2") format("woff"); }
+
+@font-face {
+  font-family: 'NeuePro-Medium';
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/neue/Neue-Medium.woff") format("truetype");
+  src: url("../fonts/neue/Neue-Medium.woff2") format("woff"); }
+
+@font-face {
   font-family: 'Neue';
   font-style: normal;
   font-weight: 600;
@@ -17,7 +31,8 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../fonts/neue/Neue-Regular-2.ttf") format("truetype"); }
+  src: url("../fonts/neue/Neue-Regular.woff") format("truetype");
+  src: url("../fonts/neue/Neue-Regular.woff2") format("woff"); }
 
 @font-face {
   font-family: 'Neue';
@@ -25,10 +40,3 @@
   font-weight: 400;
   font-display: swap;
   src: url("../fonts/neue/Neue-Light.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Neue';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("../fonts/neue/Neue-Thin.ttf") format("truetype"); }
