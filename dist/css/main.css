@@ -1710,7 +1710,9 @@ span {
         .companies-item .info .title-2:hover {
           color: var(--yellow-bright); }
       .companies-item .info .description-1 {
-        margin-bottom: 25px; }
+        margin-bottom: 25px;
+        font-family: 'NeuePro-Regular';
+        letter-spacing: 0; }
       .companies-item .info .price {
         background: var(--black);
         color: var(--white);
@@ -1780,7 +1782,8 @@ span {
           margin-right: 7%; }
         .company-info .top-list .description-1 {
           color: var(--gray-light);
-          font-weight: 600; }
+          font-family: 'NeuePro-Medium';
+          letter-spacing: -0.01em; }
     .company-info .content {
       width: 85%; }
       .company-info .content .title-2 {
