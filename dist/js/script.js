@@ -216,15 +216,12 @@ function initHistorySlider(){
                 }
             ]
         }).on('afterChange', function(event, slick, currentSlide, nextSlide){
-
             if($('#history-nav .slick-slide[data-slick-index="6"]').hasClass('slick-active') ){
                 $sliderNav.addClass('remove-mask')
             }else{
                 $sliderNav.removeClass('remove-mask')
             }
-
         });
-
     }
 }
 // ------------------------ //
@@ -322,13 +319,20 @@ const loadImagesOnScroll = (scrollValue) => {
 };
 //-----------------------------//
 
-
-// function partnersVideo (scrollValue){
-//     var partnersWrap = $('.partners-wrap').offset().top;
-//     if(partnersWrap <= scrollValue){
-//
-//     }
-// }
+function initPartnersSlider(){
+    var partner = $('.partners'),
+        partnersWrap = $('.partners-wrap');
+    if(partner.length > 1){
+        partnersWrap.slick({
+            fade: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            touchThreshold: 20,
+            infinite: false,
+            arrows: false
+        })
+    }
+}
 
 
 // Window on load
@@ -351,6 +355,7 @@ $(window).on('load', function () {
     initTeamSlider();
     initHistorySlider();
     initTeamSectionSlider();
+    initPartnersSlider();
     // ------------------------ //
 
     // Contact Block Offset
@@ -393,68 +398,8 @@ $(window).scroll(function (e) {
 
 
 
-
-
-    // function preventDefault(e) {
-    //     e.preventDefault();
-    // }
-    //
-    // function preventDefaultForScrollKeys(e) {
-    //     if (keys[e.keyCode]) {
-    //         preventDefault(e);
-    //         return false;
-    //     }
-    // }
-    //
-    // // modern Chrome requires { passive: false } when adding event
-    // var supportsPassive = false;
-    // try {
-    //     window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-    //         get: function () { supportsPassive = true; }
-    //     }));
-    // } catch(e) {}
-    //
-    // var wheelOpt = supportsPassive ? { passive: false } : false;
-    // var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
-    //
-    // // call this to Disable
-    // function disableScroll() {
-    //     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-    //     window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-    //     window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
-    //     window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-    // }
-    //
-    // // call this to Enable
-    // function enableScroll() {
-    //     window.removeEventListener('DOMMouseScroll', preventDefault, false);
-    //     window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
-    //     window.removeEventListener('touchmove', preventDefault, wheelOpt);
-    //     window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
-    // }
-    //
-    //
-    // var partnersWrap = $('.partners-wrap').offset().top;
-    // if(partnersWrap <= scrollTopValue){
-    //     disableScroll();
-    //     console.log('+')
-    // }
-
 });
 // ------------------------ //
-
-
-
-// var $window = $(window), previousScrollTop = 0, scrollLock = false;
-//
-// $window.scroll(function(event) {
-//     if(scrollLock) {
-//         $window.scrollTop(previousScrollTop);
-//         console.log($window)
-//     }
-//     previousScrollTop = $window.scrollTop();
-// });
-
 
 
 
@@ -504,6 +449,9 @@ $(document).ready(function(){
     $('.btn-scroll').on('click', function () {
         let scrollTo = $($(this).attr('data-href'));
         $("html, body").animate({ scrollTop: scrollTo.offset().top }, 500);
+        setTimeout(function(){
+            $('.partners-wrap').addClass('non-scroll');
+        }, 600);
     });
     // ------------------------ //
 
@@ -553,34 +501,60 @@ $(document).ready(function(){
     // Window on scroll
     // ------------------------ //
 
-    var heightPartners = 0,
-        offsetPartner = [];
-
-    $('.partners').each(function(index) {
-
-        // Height Partners Wrap
-        // ------------------------ //
-        let $thisHeight = $(this).height();
-        heightPartners += $thisHeight;
-        $('.partners-wrap').css({'height': `${heightPartners}px`});
-
-        // Offset Partners Sections
-        // ------------------------ //
-        let $thisOffset = $(this).offset().top;
-        offsetPartner.push($thisOffset)
-    });
-
 
     $(window).scroll(function (e) {
-        var scrollTopValue = $(this).scrollTop();
 
-        if (scrollTopValue <= $('.partners-wrap').position().top) {
-            return false
+        var scrollTopValue = $(this).scrollTop(),
+            partnersWrap = $('.partners-wrap'),
+            partnersHeight = partnersWrap.height(),
+            partnersOffset = partnersWrap.position().top;
+
+
+        if (scrollTopValue <= partnersOffset || scrollTopValue >= partnersOffset + (partnersHeight / 5)) {
+
+            partnersWrap.removeClass('non-scroll');
+
+            return false;
+
+        } else {
+
+            // Last Slide
+            partnersWrap.addClass('non-scroll');
+
+            $('.partners-wrap').on('wheel', (function (e) {
+
+                if(partnersWrap.hasClass('non-scroll')) {
+                    e.preventDefault();
+                    if (e.originalEvent.deltaY > 0) {
+                        $(this).slick('slickNext');
+                        var partnersSlideCount = $('.partners').length - 1;
+                        partnersWrap.on('afterChange', function (event, slick, currentSlide, nextSlide) {
+                            if (partnersWrap.find(`.partners[data-slick-index=${partnersSlideCount}]`).hasClass('slick-active')) {
+                                partnersWrap.removeClass('non-scroll');
+                                // setTimeout(function () {
+                                //     partnersWrap.removeClass('non-scroll');
+                                // }, 500)
+                            }
+                        });
+                    } else {
+                        $(this).slick('slickPrev');
+                        if(partnersWrap.find(`.partners[data-slick-index=0]`).hasClass('slick-active') ){
+                            partnersWrap.removeClass('non-scroll');
+                            // setTimeout(function () {
+                            //     partnersWrap.removeClass('non-scroll');
+                            // }, 500)
+                        }
+                    }
+
+                    $('.partners').find('video').each(function () {
+                        $(this)[0].muted = true;
+                    });
+                    $('.partners').removeClass('video-open');
+                    $('.partners').find('.video-sound').removeClass('active');
+                }
+
+            }));
         }
-        // else if(scrollTopValue) {
-        //
-        // }
-
     });
 
 
@@ -616,7 +590,7 @@ $(document).ready(function(){
                 video.play();
                 video.muted = false;
                 partners.addClass('video-open')
-                setTimeout( () => { $("html, body").animate({ scrollTop: partners.find('.partners-photo').offset().top }, 700), 500})
+                setTimeout( () => { $("html, body").animate({ scrollTop: partners.find('.partners-photo').offset().top - 100 }, 700), 500})
             });
 
             // Video Close
