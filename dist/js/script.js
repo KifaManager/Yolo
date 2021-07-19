@@ -102,7 +102,7 @@ function initTeamSlider() {
             touchThreshold: 20,
         }).on('beforeChange', function(event, slick, currentSlide){
             $(this).find(".team-slide.slick-active").addClass("hide");
-            loadImagesOnScroll()
+            loadImagesOnScroll($(window).scrollTop() + $(window).width())
         }).on('afterChange', function(event, slick, currentSlide){
             currentSlide++;
             let current = "0".substring(currentSlide >= 10) + currentSlide;
@@ -110,7 +110,7 @@ function initTeamSlider() {
             setTimeout(function(){
                 $(".team-slide").removeClass("hide")
             }, 300)
-            loadImagesOnScroll()
+            loadImagesOnScroll($(window).scrollTop() + $(window).width())
         });
         $sliderNav.slick({
             asNavFor: $slider,
@@ -322,6 +322,15 @@ const loadImagesOnScroll = (scrollValue) => {
 };
 //-----------------------------//
 
+
+// function partnersVideo (scrollValue){
+//     var partnersWrap = $('.partners-wrap').offset().top;
+//     if(partnersWrap <= scrollValue){
+//
+//     }
+// }
+
+
 // Window on load
 // ------------------------ //
 $(window).on('load', function () {
@@ -357,8 +366,18 @@ $(window).on('load', function () {
     // showElementsTitleScaleOnScroll($(window).scrollTop());
     //-----------------------------//
 
+
+
+
 });
 // ------------------------ //
+
+
+
+
+
+
+
 
 // Window on scroll
 // ------------------------ //
@@ -370,8 +389,71 @@ $(window).scroll(function (e) {
     scrollTopValue > playVideoOnScroll(scrollTopValue)
 
     loadImagesOnScroll(scrollTopValue);
+
+
+
+
+
+
+    // function preventDefault(e) {
+    //     e.preventDefault();
+    // }
+    //
+    // function preventDefaultForScrollKeys(e) {
+    //     if (keys[e.keyCode]) {
+    //         preventDefault(e);
+    //         return false;
+    //     }
+    // }
+    //
+    // // modern Chrome requires { passive: false } when adding event
+    // var supportsPassive = false;
+    // try {
+    //     window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+    //         get: function () { supportsPassive = true; }
+    //     }));
+    // } catch(e) {}
+    //
+    // var wheelOpt = supportsPassive ? { passive: false } : false;
+    // var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+    //
+    // // call this to Disable
+    // function disableScroll() {
+    //     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+    //     window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+    //     window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+    //     window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    // }
+    //
+    // // call this to Enable
+    // function enableScroll() {
+    //     window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    //     window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+    //     window.removeEventListener('touchmove', preventDefault, wheelOpt);
+    //     window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    // }
+    //
+    //
+    // var partnersWrap = $('.partners-wrap').offset().top;
+    // if(partnersWrap <= scrollTopValue){
+    //     disableScroll();
+    //     console.log('+')
+    // }
+
 });
 // ------------------------ //
+
+
+
+// var $window = $(window), previousScrollTop = 0, scrollLock = false;
+//
+// $window.scroll(function(event) {
+//     if(scrollLock) {
+//         $window.scrollTop(previousScrollTop);
+//         console.log($window)
+//     }
+//     previousScrollTop = $window.scrollTop();
+// });
 
 
 
@@ -431,15 +513,21 @@ $(document).ready(function(){
         .mouseenter(function() {
             let $this = $(this);
             setTimeout(function () {
+                $this.addClass('background');
+            }, 300);
+            setTimeout(function () {
                 $this.addClass('active');
-            }, 300)
+            }, 400)
         })
         .mouseleave(function() {
             let $this = $(this);
             $this.removeClass('active');
             setTimeout(function () {
+                $this.removeClass('background');
+            }, 300);
+            setTimeout(function () {
                 $this.removeClass('active');
-            }, 300)
+            }, 400)
         });
     $('.work-list .circle .btn').on('click', function () {
         $('.work-list .circle').removeClass('active');
@@ -457,19 +545,56 @@ $(document).ready(function(){
     // ------------------------ //
 
 
-    // Scroll History Nav
+    // Partner Video
     // ------------------------ //
-    $('.history-nav ').on('wheel', (function(e) {
-        if($(this).hasClass('slick-initialized')){
-            e.preventDefault();
-            e.originalEvent.deltaY < 0 ? $(this).slick('slickNext') : $(this).slick('slickPrev');
+
+
+
+    // Window on scroll
+    // ------------------------ //
+
+    var heightPartners = 0,
+        offsetPartner = [];
+
+    $('.partners').each(function(index) {
+
+        // Height Partners Wrap
+        // ------------------------ //
+        let $thisHeight = $(this).height();
+        heightPartners += $thisHeight;
+        $('.partners-wrap').css({'height': `${heightPartners}px`});
+
+        // Offset Partners Sections
+        // ------------------------ //
+        let $thisOffset = $(this).offset().top;
+        offsetPartner.push($thisOffset)
+    });
+
+
+    $(window).scroll(function (e) {
+        var scrollTopValue = $(this).scrollTop();
+
+        if (scrollTopValue <= $('.partners-wrap').position().top) {
+            return false
         }
-    }));
-    // ------------------------ //
+        // else if(scrollTopValue) {
+        //
+        // }
+
+    });
+
+
+
+
+
+
+
+
 
 
     // Partner Video
     // ------------------------ //
+
         $('.partners').each(function(index){
 
             // Init Element

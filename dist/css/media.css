@@ -153,41 +153,48 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~Folder~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @media screen and (max-width: 1500px) {
-  .folder-home .folder-info .top {
-    width: 90%;
-    padding-bottom: 25px;
-    margin: 0 0 3%; }
-  .folder-home .folder-info .title-1 {
-    width: 70%;
-    margin-bottom: 0px; }
+  .folder-home .folder-info {
+    padding: 10% 0 5%; }
+    .folder-home .folder-info .top {
+      width: 90%;
+      padding-bottom: 25px;
+      margin: 0 0 3%; }
+    .folder-home .folder-info .title-1 {
+      width: 70%;
+      margin-bottom: 0px; }
   .folder-black {
     min-height: 100vh; }
   .folder-decor {
     width: 80%;
     transform: translate(-50%, -37%); }
-  .folder-info {
-    margin: 10% 0 5% !important; }
-    .folder-info .top {
-      width: 80%; } }
+  .folder-info .top {
+    width: 80%; } }
 
 @media screen and (max-width: 1199px) {
   .folder {
     min-height: auto; } }
 
 @media screen and (max-width: 991px) {
-  .folder-info .back {
-    position: relative;
-    display: flex;
-    justify-content: center; }
-  .folder-home .folder-info .top {
-    width: 100%; }
-  .folder-home .folder-info .title-1 {
-    width: 100%;
-    margin-bottom: 0; } }
+  .folder-home .folder-info {
+    min-height: auto; }
+    .folder-home .folder-info .top {
+      width: 100%; }
+    .folder-home .folder-info .title-1 {
+      width: 100%;
+      margin-bottom: 0; }
+  .folder-company .folder-info {
+    padding-top: 5%; } }
 
 @media screen and (max-width: 767px) {
   .folder-info {
-    margin: 120px auto 50px !important; }
+    margin: 120px auto 50px !important;
+    min-height: auto; }
+    .folder-info .top {
+      width: 100%; }
+    .folder-info .back {
+      position: relative;
+      display: flex;
+      justify-content: center; }
   .folder-home .folder-info .caption-1 {
     margin: 15px 0 auto auto; }
   .folder-home .folder-info .top {
@@ -210,10 +217,21 @@
     height: 350px;
     width: 230px;
     top: 55px; }
-  .folder-company .folder-decor {
-    width: 90%; }
+  .folder-company {
+    height: auto;
+    min-height: auto; }
+    .folder-company .folder-decor {
+      width: 90%; }
+    .folder-company .folder-info {
+      min-height: auto;
+      padding-top: 0; }
   .folder-news .folder-decor {
     width: 90%; }
+  .folder-news .folder-info {
+    height: auto;
+    min-height: auto;
+    padding: 0;
+    justify-content: center; }
   .folder-decor {
     width: 95%; }
     .folder-decor .desktop {
@@ -310,7 +328,7 @@
     padding: 113px 0 95px; }
     .work-top .title-1 {
       margin-top: 36px;
-      width: 90%; }
+      width: 100%; }
     .work-top .title-4 {
       width: 83%; }
       .work-top .title-4 img {
@@ -363,6 +381,8 @@
       display: flex;
       align-items: center;
       align-items: flex-start; }
+      .portfolio-slide:hover .photo .logo {
+        opacity: 1; }
       .portfolio-slide .photo {
         height: 140px;
         width: 140px;
@@ -370,7 +390,8 @@
         .portfolio-slide .photo .logo {
           max-width: 70%; }
         .portfolio-slide .photo .price,
-        .portfolio-slide .photo .actions {
+        .portfolio-slide .photo .actions,
+        .portfolio-slide .photo .title {
           display: none; }
       .portfolio-slide .info {
         display: flex;
@@ -537,11 +558,15 @@
   .values-item {
     width: 100%; }
     .values-item .title-3 {
-      width: 100%; } }
+      width: 100%;
+      min-height: 90px; } }
 
 @media screen and (max-width: 991px) {
   .values-item {
     width: 100%; }
+    .values-item .title-3 {
+      min-height: 50px;
+      margin-bottom: 20px; }
   .values-title .caption-border {
     font-size: 80px; } }
 
@@ -558,7 +583,7 @@
       margin-bottom: 30px; }
       .values-item .title-3 {
         width: 100%;
-        margin-bottom: 20px; } }
+        min-height: auto; } }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~Footer~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
