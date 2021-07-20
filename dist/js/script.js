@@ -356,16 +356,13 @@ $(window).on('load', function () {
     // showElementsTitleScaleOnScroll($(window).scrollTop());
     //-----------------------------//
 
-
+    setTimeout(function () {
+        $("html, body").animate({ scrollTop: 0 }, 0);
+    }, 50)
 
 
 });
 // ------------------------ //
-
-
-
-
-
 
 
 
@@ -380,19 +377,13 @@ $(window).scroll(function (e) {
 
     loadImagesOnScroll(scrollTopValue);
 
-
-
-
 });
 // ------------------------ //
 
 
-
 $(document).ready(function(){
 
-
-
-
+    $("html, body").animate({ scrollTop: 0 }, 0);
 
     // Window on resize
     // ------------------------ //
@@ -476,78 +467,6 @@ $(document).ready(function(){
         }
     }));
     // ------------------------ //
-
-
-    // Partner Video
-    // ------------------------ //
-
-
-
-    // Window on scroll
-    // ------------------------ //
-
-
-    // $(window).scroll(function (e) {
-    //
-    //     var scrollTopValue = $(this).scrollTop(),
-    //         partnersWrap = $('.partners-wrap'),
-    //         partnersHeight = partnersWrap.height(),
-    //         partnersOffset = partnersWrap.position().top;
-    //
-    //
-    //     if (scrollTopValue <= partnersOffset || scrollTopValue >= partnersOffset + (partnersHeight / 5)) {
-    //
-    //         partnersWrap.removeClass('non-scroll');
-    //
-    //         return false;
-    //
-    //     } else {
-    //
-    //         // Last Slide
-    //         partnersWrap.addClass('non-scroll');
-    //
-    //         $('.partners-wrap').on('wheel', (function (e) {
-    //
-    //             if(partnersWrap.hasClass('non-scroll')) {
-    //                 e.preventDefault();
-    //                 if (e.originalEvent.deltaY > 0) {
-    //                     $(this).slick('slickNext');
-    //                     var partnersSlideCount = $('.partners').length - 1;
-    //                     partnersWrap.on('afterChange', function (event, slick, currentSlide, nextSlide) {
-    //                         if (partnersWrap.find(`.partners[data-slick-index=${partnersSlideCount}]`).hasClass('slick-active')) {
-    //                             partnersWrap.removeClass('non-scroll');
-    //                             // setTimeout(function () {
-    //                             //     partnersWrap.removeClass('non-scroll');
-    //                             // }, 500)
-    //                         }
-    //                     });
-    //                 } else {
-    //                     $(this).slick('slickPrev');
-    //                     if(partnersWrap.find(`.partners[data-slick-index=0]`).hasClass('slick-active') ){
-    //                         partnersWrap.removeClass('non-scroll');
-    //                         // setTimeout(function () {
-    //                         //     partnersWrap.removeClass('non-scroll');
-    //                         // }, 500)
-    //                     }
-    //                 }
-    //
-    //                 $('.partners').find('video').each(function () {
-    //                     $(this)[0].muted = true;
-    //                 });
-    //                 $('.partners').removeClass('video-open');
-    //                 $('.partners').find('.video-sound').removeClass('active');
-    //             }
-    //
-    //         }));
-    //     }
-    // });
-
-
-
-
-
-
-
 
 
 

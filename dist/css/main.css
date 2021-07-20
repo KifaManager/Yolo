@@ -264,6 +264,10 @@ span {
     transition: all .2s;
     margin-top: -4px; }
 
+.link-disabled {
+  pointer-events: none;
+  opacity: .5; }
+
 .caption-1 {
   font-size: 76px;
   line-height: 110%;
