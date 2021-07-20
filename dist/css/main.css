@@ -634,7 +634,8 @@ span {
 .folder {
   min-height: 100vh;
   position: relative;
-  margin-bottom: 7.5%; }
+  margin-bottom: 7.5%;
+  overflow: hidden; }
   .folder-home {
     margin-bottom: 0 !important; }
     .folder-home .folder-info {
@@ -786,26 +787,22 @@ span {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .partners {
   color: var(--white);
-  padding: 100px 0;
-  overflow: hidden;
-  position: absolute;
+  padding: 100px 0 0;
   top: 0;
   left: 0;
-  width: 100%;
-  cursor: grab;
-  min-height: 110vh !important; }
-  .partners.slick-current .partners-info,
-  .partners.slick-current .partners-photo {
-    opacity: 1;
-    transform: translate(0px, 0px); }
+  width: 100%; }
   .partners-wrap {
     position: relative;
     background: var(--black);
     min-height: 100vh; }
   .partners.video-open .partners-photo {
-    width: 100%; }
+    width: 175%;
+    height: 100vh; }
     .partners.video-open .partners-photo video {
       cursor: pointer; }
+  .partners.video-open .partners-photo-wrap {
+    position: relative;
+    z-index: 1; }
   .partners.video-open .partners-info {
     transform: translate(80px, 0);
     opacity: 0; }
@@ -816,15 +813,21 @@ span {
   .partners div[class^="col"] {
     position: unset; }
   .partners-photo {
-    width: 55%;
+    width: 100%;
     height: 100%;
     position: absolute;
     left: 0%;
-    top: 4%;
+    top: 0%;
     transition: all .5s ease-in;
-    z-index: 1;
-    transform: translate(100px, 0px);
-    opacity: 0; }
+    z-index: 1; }
+    .partners-photo-wrap {
+      height: 1000px;
+      padding-top: 4%; }
+    .partners-photo-inner {
+      position: sticky;
+      top: 0%;
+      width: 100%;
+      height: 800px; }
     .partners-photo video {
       width: 100%;
       height: 100%;
@@ -835,9 +838,7 @@ span {
       right: 30px; }
   .partners-info {
     padding: 15% 15px 0;
-    transition: transform .5s, opacity 1s;
-    transform: translate(100px, 0px);
-    opacity: 0; }
+    transition: transform .5s, opacity 1s; }
     .partners-info .caption-1 {
       margin: 0 0 18% -10px; }
     .partners-info .title-3 {
@@ -858,7 +859,8 @@ span {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .work {
   background: var(--black);
-  color: var(--white); }
+  color: var(--white);
+  overflow: hidden; }
   .work-top {
     width: 83%;
     margin: 0 auto;
@@ -989,7 +991,8 @@ span {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~Portfolio~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .portfolio {
-  padding: 9% 0; }
+  padding: 9% 0;
+  overflow: hidden; }
   .portfolio-top {
     display: flex;
     align-items: center;
@@ -1232,7 +1235,8 @@ span {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~News~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .news {
-  padding: 8.5% 0; }
+  padding: 8.5% 0;
+  overflow: hidden; }
   .news-section {
     padding: 0; }
     .news-section .news-item-big {
@@ -1730,6 +1734,30 @@ span {
   .partners-link .title-5 {
     color: var(--yellow-bright);
     transition: all .2s; }
+
+.partners-video {
+  width: 100%;
+  height: 100%; }
+  .partners-video:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 10%;
+    left: 0;
+    top: 0%;
+    background: #000;
+    -webkit-mask-image: linear-gradient(0deg, rgba(2, 0, 36, 0) 0%, rgba(169, 1, 240, 0.683911) 30%, rgba(26, 2, 32, 0.9052) 60%, #1a0220 100%);
+    z-index: 1; }
+  .partners-video:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 10%;
+    left: 0;
+    bottom: 0%;
+    background: #000;
+    -webkit-mask-image: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(169, 1, 240, 0.683911) 30%, rgba(26, 2, 32, 0.9052) 60%, #1a0220 100%);
+    z-index: 1; }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~Companies~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

@@ -319,20 +319,6 @@ const loadImagesOnScroll = (scrollValue) => {
 };
 //-----------------------------//
 
-function initPartnersSlider(){
-    var partner = $('.partners'),
-        partnersWrap = $('.partners-wrap');
-    if(partner.length > 1){
-        partnersWrap.slick({
-            fade: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            touchThreshold: 20,
-            infinite: false,
-            arrows: false
-        })
-    }
-}
 
 
 // Window on load
@@ -355,7 +341,6 @@ $(window).on('load', function () {
     initTeamSlider();
     initHistorySlider();
     initTeamSectionSlider();
-    initPartnersSlider();
     // ------------------------ //
 
     // Contact Block Offset
@@ -502,60 +487,60 @@ $(document).ready(function(){
     // ------------------------ //
 
 
-    $(window).scroll(function (e) {
-
-        var scrollTopValue = $(this).scrollTop(),
-            partnersWrap = $('.partners-wrap'),
-            partnersHeight = partnersWrap.height(),
-            partnersOffset = partnersWrap.position().top;
-
-
-        if (scrollTopValue <= partnersOffset || scrollTopValue >= partnersOffset + (partnersHeight / 5)) {
-
-            partnersWrap.removeClass('non-scroll');
-
-            return false;
-
-        } else {
-
-            // Last Slide
-            partnersWrap.addClass('non-scroll');
-
-            $('.partners-wrap').on('wheel', (function (e) {
-
-                if(partnersWrap.hasClass('non-scroll')) {
-                    e.preventDefault();
-                    if (e.originalEvent.deltaY > 0) {
-                        $(this).slick('slickNext');
-                        var partnersSlideCount = $('.partners').length - 1;
-                        partnersWrap.on('afterChange', function (event, slick, currentSlide, nextSlide) {
-                            if (partnersWrap.find(`.partners[data-slick-index=${partnersSlideCount}]`).hasClass('slick-active')) {
-                                partnersWrap.removeClass('non-scroll');
-                                // setTimeout(function () {
-                                //     partnersWrap.removeClass('non-scroll');
-                                // }, 500)
-                            }
-                        });
-                    } else {
-                        $(this).slick('slickPrev');
-                        if(partnersWrap.find(`.partners[data-slick-index=0]`).hasClass('slick-active') ){
-                            partnersWrap.removeClass('non-scroll');
-                            // setTimeout(function () {
-                            //     partnersWrap.removeClass('non-scroll');
-                            // }, 500)
-                        }
-                    }
-
-                    $('.partners').find('video').each(function () {
-                        $(this)[0].muted = true;
-                    });
-                    $('.partners').removeClass('video-open');
-                    $('.partners').find('.video-sound').removeClass('active');
-                }
-
-            }));
-        }
-    });
+    // $(window).scroll(function (e) {
+    //
+    //     var scrollTopValue = $(this).scrollTop(),
+    //         partnersWrap = $('.partners-wrap'),
+    //         partnersHeight = partnersWrap.height(),
+    //         partnersOffset = partnersWrap.position().top;
+    //
+    //
+    //     if (scrollTopValue <= partnersOffset || scrollTopValue >= partnersOffset + (partnersHeight / 5)) {
+    //
+    //         partnersWrap.removeClass('non-scroll');
+    //
+    //         return false;
+    //
+    //     } else {
+    //
+    //         // Last Slide
+    //         partnersWrap.addClass('non-scroll');
+    //
+    //         $('.partners-wrap').on('wheel', (function (e) {
+    //
+    //             if(partnersWrap.hasClass('non-scroll')) {
+    //                 e.preventDefault();
+    //                 if (e.originalEvent.deltaY > 0) {
+    //                     $(this).slick('slickNext');
+    //                     var partnersSlideCount = $('.partners').length - 1;
+    //                     partnersWrap.on('afterChange', function (event, slick, currentSlide, nextSlide) {
+    //                         if (partnersWrap.find(`.partners[data-slick-index=${partnersSlideCount}]`).hasClass('slick-active')) {
+    //                             partnersWrap.removeClass('non-scroll');
+    //                             // setTimeout(function () {
+    //                             //     partnersWrap.removeClass('non-scroll');
+    //                             // }, 500)
+    //                         }
+    //                     });
+    //                 } else {
+    //                     $(this).slick('slickPrev');
+    //                     if(partnersWrap.find(`.partners[data-slick-index=0]`).hasClass('slick-active') ){
+    //                         partnersWrap.removeClass('non-scroll');
+    //                         // setTimeout(function () {
+    //                         //     partnersWrap.removeClass('non-scroll');
+    //                         // }, 500)
+    //                     }
+    //                 }
+    //
+    //                 $('.partners').find('video').each(function () {
+    //                     $(this)[0].muted = true;
+    //                 });
+    //                 $('.partners').removeClass('video-open');
+    //                 $('.partners').find('.video-sound').removeClass('active');
+    //             }
+    //
+    //         }));
+    //     }
+    // });
 
 
 
@@ -589,8 +574,9 @@ $(document).ready(function(){
             partners.find('.video-play').on('click', function () {
                 video.play();
                 video.muted = false;
-                partners.addClass('video-open')
-                setTimeout( () => { $("html, body").animate({ scrollTop: partners.find('.partners-photo').offset().top - 100 }, 700), 500})
+                partners.addClass('video-open');
+                overflow.Add();
+                setTimeout( () => { $("html, body").animate({ scrollTop: partners.find('.partners-photo').offset().top}, 700), 500})
             });
 
             // Video Close
@@ -598,6 +584,7 @@ $(document).ready(function(){
             partners.find('.video-close').on('click', function () {
                 video.muted = true;
                 partners.removeClass('video-open');
+                overflow.Remove();
                 partners.find('.video-sound').removeClass('active');
             });
 
@@ -616,6 +603,7 @@ $(document).ready(function(){
                 video.muted = true;
                 partners.removeClass('video-open');
                 partners.find('.video-sound').removeClass('active');
+                overflow.Remove();
             });
 
             // Remove Video Poster
